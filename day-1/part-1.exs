@@ -1,4 +1,4 @@
-File.read!("day-1/input.txt")
+IO.read(:stdio, :all)
 |> String.trim_trailing()
 |> String.split("\n")
 |> Enum.map(&Kernel.elem(Integer.parse(&1, 10), 0))

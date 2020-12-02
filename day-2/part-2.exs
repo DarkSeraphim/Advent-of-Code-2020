@@ -1,4 +1,4 @@
-policy = Regex.compile!("(?<first>\\d+)-(?<second>\\d+) (?<char>\\S): (?<password>\\S+)")
+policy = ~r/(?<first>\d+)-(?<second>\d+) (?<char>\S): (?<password>\S+)/
 
 validate_password = fn(match) ->
   {first, _bin} = Integer.parse(Map.get(match, "first"))
@@ -14,7 +14,7 @@ validate_password = fn(match) ->
   end
 end
 
-File.read!("day-2/input.txt")
+IO.read(:stdio, :all)
 |> String.trim_trailing()
 |> String.split("\n")
 |> Enum.map(&(Regex.named_captures(policy, &1)))
