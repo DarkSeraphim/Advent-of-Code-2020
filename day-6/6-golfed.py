@@ -1,0 +1,1 @@
+print(reduce(lambda a,b: (a[0]+b[0],a[1]+b[1]),map(lambda a: (len(reduce((lambda x,y: x.union(y)), a)), len(reduce(lambda x,y: x.intersection(y), a))), [[set(p) for p in g.strip().split('\n')]for g in ''.join(open('6.txt')).split('\n\n')])))
