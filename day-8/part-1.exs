@@ -1,29 +1,28 @@
+Code.require_file("lib.exs")
+
 defmodule Day8_1 do
-  def execute({"nop", _value}, ip, acc), do: {ip + 1, acc}
+  def execute({"nop", _}, ip, acc), do: {ip + 1, acc}
   def execute({"acc", value}, ip, acc), do: {ip + 1, acc + value}
   def execute({"jmp", value}, ip, acc), do: {ip + value, acc}
 
-  def next(code, ip, acc, visited) do
-    {ip, acc} = execute(Enum.at(code, ip), ip, acc)
-    if MapSet.member?(visited, ip) do
-      acc
-    else
-      next(code, ip, acc, MapSet.put(visited, ip))
+  def start(code), do: next({0, 0}, code, MapSet.new())
+
+  def next({ip, acc}, code, visited) do
+    case MapSet.member?(visited, ip) do
+      true -> acc
+      false -> execute(Enum.at(code, ip), ip, acc) 
+               |> next(code, MapSet.put(visited, ip))
     end
   end
 
-  def parse_line(s) do
-    [instruction, value] = String.split(s, " ", trim: true)
-    {value, _} = Integer.parse(value)
-    {instruction, value}
+  def parse_line(<<instruction::binary-size(3), " ", num::binary>>) do
+    {instruction, Common.int(num)}
   end
 
   def solve() do
-    IO.read(:stdio, :all)
-    |> String.trim_trailing()
-    |> String.split("\n")
+    Common.read_lines()
     |> Enum.map(&parse_line/1)
-    |> next(0, 0, MapSet.new())
+    |> start
     |> to_string()
     |> IO.puts()
   end
