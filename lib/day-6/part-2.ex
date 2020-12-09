@@ -1,4 +1,4 @@
-defmodule Day6_1 do
+defmodule Day6_2 do
 
   @spec parse_group(String.t()) :: MapSet.t(String.t())
   def parse_member(member) do
@@ -12,7 +12,7 @@ defmodule Day6_1 do
     group
     |> String.split("\n")
     |> Enum.map(&parse_member/1)
-    |> Enum.reduce(&MapSet.union/2)
+    |> Enum.reduce(&MapSet.intersection/2)
     |> Enum.count()
   end
 
@@ -28,5 +28,3 @@ defmodule Day6_1 do
   end
 
 end
-
-Day6_1.solve()

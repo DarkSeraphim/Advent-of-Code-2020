@@ -1,4 +1,4 @@
-defmodule Day7_1 do
+defmodule Day7_2 do
   @spec parse_holding([String.t()]) :: {String.t(), [{String.t(), integer()}]}
   def parse_holding([bag, holding]) do
     Regex.scan(~r/(\d) (\S+ \S+) bags?/, holding)
@@ -37,5 +37,3 @@ defmodule Day7_1 do
     |> IO.puts()
   end
 end
-
-Day7_1.solve()

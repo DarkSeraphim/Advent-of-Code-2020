@@ -84,5 +84,3 @@ defmodule Day4_2 do
     |> IO.puts()
   end
 end
-
-Day4_2.solve()

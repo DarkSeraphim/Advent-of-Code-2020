@@ -1,5 +1,3 @@
-Code.require_file("lib.exs")
-
 defmodule Day8_1 do
   def execute({"nop", _}, ip, acc), do: {ip + 1, acc}
   def execute({"acc", value}, ip, acc), do: {ip + 1, acc + value}
@@ -27,5 +25,3 @@ defmodule Day8_1 do
     |> IO.puts()
   end
 end
-
-Day8_1.solve()

@@ -39,11 +39,8 @@ defmodule Day7_1 do
     |> String.split("\n")
     |> Enum.map(&parse_bag/1)
     |> Map.new()
-    |> IO.inspect()
     |> search_from_all("shiny gold")
     |> to_string()
     |> IO.puts()
   end
 end
-
-Day7_1.solve()

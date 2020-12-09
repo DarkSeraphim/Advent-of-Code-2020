@@ -12,7 +12,7 @@ defmodule Day6_1 do
     group
     |> String.split("\n")
     |> Enum.map(&parse_member/1)
-    |> Enum.reduce(&MapSet.intersection/2)
+    |> Enum.reduce(&MapSet.union/2)
     |> Enum.count()
   end
 
@@ -28,5 +28,3 @@ defmodule Day6_1 do
   end
 
 end
-
-Day6_1.solve()

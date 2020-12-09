@@ -1,9 +1,9 @@
-defmodule Aoc2020.MixProject do
+defmodule AdventOfCode.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :aoc2020,
+      app: :advent_of_code,
       version: "0.1.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
@@ -14,6 +14,7 @@ defmodule Aoc2020.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
+      mod: {Runner, []},
       extra_applications: [:logger]
     ]
   end

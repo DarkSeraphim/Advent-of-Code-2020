@@ -52,5 +52,3 @@ defmodule Day8_2 do
     |> IO.puts()
   end
 end
-
-Day8_2.solve()
