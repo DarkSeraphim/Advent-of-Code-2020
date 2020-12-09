@@ -1,21 +1,19 @@
 defmodule Day9_1 do
-  def if_cont_return(tuple) do
-    case tuple do
-      {:halt, _} -> false
-      _ -> true
-    end
-  end
+  def if_not_halt_return({:halt, _}), do: false
+  def if_not_halt_return(_), do: true
 
   def check_slice(start, enum, size) do
     Enum.drop(enum, start)
-    |> (&(Day1_2.solve_for_n(Enum.take(&1, size), Enum.at(&1, size)))).()
-    |> if_cont_return
+    |> Enum.take(size)
+    |> Day1_2.solve_for_n(Enum.at(enum, start + size))
+    |> if_not_halt_return
   end
 
   def produce_ranges(enum, size) do
     0..(Enum.count(enum) - (size + 1))
     |> Enum.filter(&(check_slice(&1, enum, size)))
-    |> (&(Enum.at(enum, Enum.at(&1, 0) + size))).()
+    |> Enum.at(0)
+    |> (&(Enum.at(enum, &1 + size))).()
   end
 
   def find_first_invalid(window) do
