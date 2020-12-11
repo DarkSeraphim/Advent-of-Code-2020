@@ -13,7 +13,7 @@ defmodule Common do
   end
 
   def inspect_grid(map, cols \\ 10, rows \\ 10) do
-    IO.puts(Enum.map(0..(rows-1), (&(inspect_map_row(&1, map, cols))))
+    IO.puts(Enum.map(0..(rows-1), (&(inspect_grid_row(&1, map, cols))))
     |> Enum.join("\n"))
     map
   end
