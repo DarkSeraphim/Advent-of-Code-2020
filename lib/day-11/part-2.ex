@@ -41,10 +41,11 @@ defmodule Day11_2 do
   end 
 
   def game_of_life?(map, width, height) do
-    :timer.sleep(1000)
-    IO.puts(IO.ANSI.clear())
-    IO.puts(Common.inspect_grid(map, width, height, %{empty: "#{IO.ANSI.green()}\u2588", full: "#{IO.ANSI.red()}\u2588", floor: "#{IO.ANSI.black()}\u2588"}))
-
+    if System.get_env("ANSI") == "true" do
+      :timer.sleep(500)
+      IO.puts(IO.ANSI.clear())
+      IO.puts(Common.inspect_grid(map, width, height, %{empty: "#{IO.ANSI.color(111)}L", full: "#{IO.ANSI.color(172)}#", floor: "#{IO.ANSI.black()} "}))
+    end
     new_map = cycle(map)
     if map == new_map do
       Map.values(map)
