@@ -7,14 +7,15 @@ defmodule Common do
 
   def int(s), do: String.to_integer(s)
 
-  def inspect_grid_row(row, map, cols \\ 10) do
-    Enum.map(0..(cols-1), fn(col) -> Map.get(map, {col, row}, ".") end)
+  defp map_char(mapping, char), do: Map.get(mapping, char, char)
+
+  def inspect_grid_row(row, map, cols, mapping) do
+    Enum.map(0..(cols-1), fn(col) -> map_char(mapping, Map.get(map, {col, row}, ".")) end)
     |> Enum.join("")
   end
 
-  def inspect_grid(map, cols \\ 10, rows \\ 10) do
-    IO.puts(Enum.map(0..(rows-1), (&(inspect_grid_row(&1, map, cols))))
-    |> Enum.join("\n"))
-    map
+  def inspect_grid(map, cols \\ 10, rows \\ 10, mapping \\ %{}) do
+    Enum.map(0..(rows-1), (&(inspect_grid_row(&1, map, cols, mapping))))
+    |> Enum.join("\n")
   end
 end
