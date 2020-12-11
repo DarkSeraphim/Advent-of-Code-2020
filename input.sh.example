@@ -1,2 +1,2 @@
 export AOC_SESSION=<session token here>
-curl -o "lib/day-$1/input.txt" https://adventofcode.com/2020/day/$1/input --cookie "session=$AOC_SESSION"
+curl -o "lib/day-$(printf %02d $1)/input.txt" https://adventofcode.com/2020/day/$1/input --cookie "session=$AOC_SESSION"
