@@ -1,8 +1,16 @@
 defmodule Common do
+  def read_line() do
+    IO.read(:stdio, :line) |> String.trim_trailing()
+  end
+
   def read_lines(delimiter \\ "\n") do
     IO.read(:stdio, :all)
     |> String.trim_trailing()
     |> String.split(delimiter)
+  end
+
+  def read_int() do
+    read_line() |> int()
   end
 
   def int(s), do: String.to_integer(s)
