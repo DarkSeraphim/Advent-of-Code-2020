@@ -13,7 +13,7 @@ defmodule Common do
     read_line() |> int()
   end
 
-  def int(s), do: String.to_integer(s)
+  def int(s, base \\ 10), do: String.to_integer(s, base)
 
   defp map_char(mapping, char), do: Map.get(mapping, char, char)
 
