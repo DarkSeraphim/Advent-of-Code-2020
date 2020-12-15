@@ -1,44 +1,34 @@
 defmodule Day15_2 do
   import Common
 
-  def find_next(last, _pos_cache, turn, turn) do
-    last
-  end
-
-  def find_next(last, pos_cache, turn, goal) do
-    target = last
-    old_indices = :ets.lookup(pos_cache, target) 
-    next = (case old_indices do
-      [{^target, [_x]}] -> 0
-      [{^target, [x, y]}] -> y - x
-    end)
-
-    pair = case :ets.lookup(pos_cache, next) do     
-      [] -> [turn]
-      [{^next, [x]}] -> [x, turn]
-      [{^next, [_x, y]}] -> [y, turn]
+  def find_next(last, _pos_cache, turn, turn), do: last
+  def find_next(target, pos_cache, turn, goal) do
+    next = case Map.get(pos_cache, target) do
+      nil -> 0
+      y -> turn - y
     end
-    
-    :ets.insert(pos_cache, {next, pair})
+
+    # The last number has officially been seen by us now
+    pos_cache = Map.put(pos_cache, target, turn)
     find_next(next, pos_cache, turn + 1, goal)
   end
 
   def list_to_idx_cache(list) do
     Enum.with_index(list)
-    |> Enum.map(fn ({value, idx}) -> {value, [idx]} end)
-    |> Enum.reduce(:ets.new(:seen, [:set]), fn(p, a) -> 
-      :ets.insert(a, p)
-      a 
-    end)
+    # Pretend we didn't see the last number yet
+    |> List.delete_at(Enum.count(list))
+    |> Map.new()
   end
 
-  def start_game(seq), do: find_next(List.last(seq), list_to_idx_cache(seq), Enum.count(seq), 30000000)
+  def start_game(seq, rounds) do
+    find_next(List.last(seq), list_to_idx_cache(seq), Enum.count(seq) - 1, rounds - 1)
+  end
 
   def solve() do
     read_line()
     |> String.split(",")
     |> Enum.map(&int/1)
-    |> start_game()
+    |> start_game(30_000_000 - 1)
     |> to_string()
     |> IO.puts()
   end
