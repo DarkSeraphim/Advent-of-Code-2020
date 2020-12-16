@@ -75,9 +75,5 @@ defmodule Day16_2 do
     |> Enum.reduce(1, &Kernel.*/2)
     |> to_string()
     |> IO.puts()
-
-    #|> to_string()
-    #|> IO.puts()
-
   end
 end
