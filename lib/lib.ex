@@ -26,4 +26,9 @@ defmodule Common do
     Enum.map(0..(rows-1), (&(inspect_grid_row(&1, map, cols, mapping))))
     |> Enum.join("\n")
   end
+
+  def transpose([[] | _]), do: []
+  def transpose(matrix) do
+    [Enum.map(matrix, &hd/1) | transpose(Enum.map(matrix, &tl/1))]
+  end
 end

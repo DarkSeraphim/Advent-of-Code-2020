@@ -24,12 +24,7 @@ defmodule Day16_2 do
 
   def is_invalid(ticket, rules) do
     not (Enum.any?(ticket, &is_field_invalid(&1, rules)))
-  end
-
-  def transpose([[] | _]), do: []
-  def transpose(matrix) do
-    [Enum.map(matrix, &hd/1) | transpose(Enum.map(matrix, &tl/1))]
-  end
+  end 
 
   def match_dataset({rule, _}, dataset) do
     Enum.all?(dataset, &check_rule(&1, rule)) 
